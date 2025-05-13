@@ -1,11 +1,32 @@
 -- Inner Join to retrieve all bookings and the respective users
-SELECT * FROM Bookings
-JOIN Users ON users.user_id = bookings.guest_id
+SELECT 
+    bookings.booking_id,
+    bookings.check_in_date,
+    bookings.total_price,
+    users.user_id,
+    CONCAT(users.first_name, ' ', users.last_name) AS full_name,
+    users.email
+FROM bookings
+INNER JOIN users ON users.user_id = bookings.guest_id;
+
 
 -- Left join to retrieve all properties and their reviews
-SELECT property_id, title FROM Properties
-JOIN Reviews ON properties.property_id = reviews.property_id
+SELECT 
+    properties.property_id,
+    properties.title,
+    reviews.review_id,
+    reviews.rating,
+    reviews.review
+FROM properties
+LEFT JOIN reviews ON properties.property_id = reviews.property_id;
+
 
 -- Full outer join to retireve all users and bookings
-SELECT user_id, CONCAT(first_name, ' ', last_name) AS full_name FROM Users
-FULL OUTER JOIN Bookings ON users.user_id = bookings.guest_id
+SELECT 
+    users.user_id,
+    CONCAT(users.first_name, ' ', users.last_name) AS full_name,
+    bookings.booking_id,
+    bookings.check_in_date,
+    bookings.status
+FROM users
+FULL OUTER JOIN bookings ON users.user_id = bookings.guest_id;
