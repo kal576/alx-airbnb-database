@@ -18,7 +18,8 @@ SELECT
     reviews.rating,
     reviews.review
 FROM properties
-LEFT JOIN reviews ON properties.property_id = reviews.property_id;
+LEFT JOIN reviews ON properties.property_id = reviews.property_id
+ORDER BY reviews.rating;
 
 
 -- Full outer join to retireve all users and bookings
