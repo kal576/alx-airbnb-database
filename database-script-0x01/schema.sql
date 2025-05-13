@@ -1,8 +1,8 @@
 -- Users Table
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password TEXT NOT NULL,  -- Should store hashed passwords
     role VARCHAR(20) CHECK (role IN ('admin', 'host', 'guest')) NOT NULL,
@@ -60,6 +60,7 @@ CREATE TABLE reviews (
     rating INT CHECK (rating BETWEEN 1 AND 5),
     review TEXT,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (booking_id, guest_id),
     FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE SET NULL,
     FOREIGN KEY (guest_id) REFERENCES users(user_id) ON DELETE SET NULL
 );
