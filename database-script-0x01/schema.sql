@@ -57,10 +57,12 @@ CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
     booking_id INT,
     guest_id INT,
+    property_id INT,
     rating INT CHECK (rating BETWEEN 1 AND 5),
     review TEXT,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE (booking_id, guest_id),
     FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE SET NULL,
-    FOREIGN KEY (guest_id) REFERENCES users(user_id) ON DELETE SET NULL
+    FOREIGN KEY (guest_id) REFERENCES users(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (property_id) REFERENCES properties(property_id) ON DELETE SET NULL
 );
