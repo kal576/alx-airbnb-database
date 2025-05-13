@@ -9,3 +9,5 @@ CREATE INDEX idx_bookings_property_id ON bookings(property_id);
 CREATE INDEX idx_bookings_host_id ON bookings(host_id);
 CREATE INDEX idx_property_id ON properties(property_id);
 
+-- analysing performance
+EXPLAIN SELECT * FROM properties WHERE host_id = 'h0001';
