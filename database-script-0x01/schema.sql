@@ -29,6 +29,7 @@ CREATE TABLE bookings (
     property_id INT,
     guest_id INT,
     num_of_guests INT NOT NULL,
+    num_of_nights INT DEFAULT 1,
     total_price NUMERIC(10, 2),
     check_in_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     check_out_date DATE,
