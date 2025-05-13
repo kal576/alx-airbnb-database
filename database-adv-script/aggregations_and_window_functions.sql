@@ -1,0 +1,19 @@
+-- Query to find the total number of bookings made by each user
+SELECT users.user_id,
+	CONCAT (users.first_name, ' ', users.last_name) AS full_name,
+	COUNT(bookings.booking_id) AS total_bookings
+FROM Users
+LEFT JOIN Bookings ON users.user_id = bookings.guest_id
+GROUP BY user_id, first_name, last_name
+ORDER BY total_bookings
+
+-- Ranking properties based on total number of bookings
+SELECT p.property_id,
+	p.title,
+	COUNT (b.booking_id) AS total_bookings,
+	RANK() OVER (ORDER BY COUNT(b.booking_id) AS booking_rank
+FROM properties p
+LEFT JOIN bookings b ON p.property_id = b.property_id
+GROUP BY p.property_id, p.title
+ORDER BY booking_rank;
+	
