@@ -11,6 +11,7 @@ FROM Bookings
 JOIN users u ON u.user_id = b.guest_id
 JOIN properties p ON p.property_id = b.property_id
 LEFT JOIN payments pay ON pay.booking_id = b.booking_id
+WHERE pay.method = 'Cash' AND p.title IS NOT NULL
 ORDER BY b.booking_id;
 
 -- created indexes
@@ -27,9 +28,11 @@ EXPLAIN SELECT b.booking_id,
         pay.payment_id,
         pay.payment_method,
         pay.payment_date
+FROM Bookings 
 JOIN users u ON u.user_id = b.guest_id
 JOIN properties p ON p.property_id = b.property_id
 LEFT JOIN payments pay ON pay.booking_id = b.booking_id
+WHERE pay.method = 'Cash' AND p.title IS NOT NULL
 ORDER BY b.booking_id;
 
 
