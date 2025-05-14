@@ -56,7 +56,6 @@ CREATE TABLE payments (
 CREATE TABLE reviews (
     review_id VARCHAR(255) PRIMARY KEY,
     booking_id VARCHAR(255),
-    guest_id VARCHAR(255),
     property_id VARCHAR(255),
     rating INT CHECK (rating BETWEEN 1 AND 5),
     review TEXT,
