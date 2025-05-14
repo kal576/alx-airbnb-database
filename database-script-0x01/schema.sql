@@ -1,6 +1,6 @@
 -- Users Table
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
+    user_id VARCHAR(255) PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -12,8 +12,8 @@ CREATE TABLE users (
 
 -- Properties Table
 CREATE TABLE properties (
-    property_id SERIAL PRIMARY KEY,
-    host_id INT,
+    property_id VARCHAR(255) PRIMARY KEY,
+    host_id VARCHAR(255),
     title VARCHAR(255),
     property_image TEXT,  -- URL or path to image
     property_type VARCHAR(50) CHECK (property_type IN ('apartment', 'bedsitter', 'cottage')),
@@ -25,9 +25,9 @@ CREATE TABLE properties (
 
 -- Bookings Table
 CREATE TABLE bookings (
-    booking_id SERIAL PRIMARY KEY,
-    property_id INT,
-    guest_id INT,
+    booking_id VARCHAR(255) PRIMARY KEY,
+    property_id VARCHAR(255),
+    guest_id VARCHAR(255),
     num_of_guests INT NOT NULL,
     num_of_nights INT DEFAULT 1,
     total_price NUMERIC(10, 2),
@@ -41,8 +41,8 @@ CREATE TABLE bookings (
 
 -- Payments Table
 CREATE TABLE payments (
-    payment_id SERIAL PRIMARY KEY,
-    booking_id INT,
+    payment_id VARCHAR(255) PRIMARY KEY,
+    booking_id VARCHAR(255),
     amount NUMERIC(10, 2),
     status VARCHAR(50) DEFAULT 'Pending' CHECK (status IN ('Pending', 'Completed', 'Pending Refund', 'Refunded')),
     payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -54,10 +54,10 @@ CREATE TABLE payments (
 
 -- Reviews Table
 CREATE TABLE reviews (
-    review_id SERIAL PRIMARY KEY,
-    booking_id INT,
-    guest_id INT,
-    property_id INT,
+    review_id VARCHAR(255) PRIMARY KEY,
+    booking_id VARCHAR(255),
+    guest_id VARCHAR(255),
+    property_id VARCHAR(255),
     rating INT CHECK (rating BETWEEN 1 AND 5),
     review TEXT,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
